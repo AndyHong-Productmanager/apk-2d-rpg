@@ -1,0 +1,16 @@
+# Godot generated state
+.godot/
+.import/
+
+# Local temporary files
+*.tmp
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local evidence/output folders
+.omo/evidence/
+evidence/
+.evidence/
