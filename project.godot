@@ -9,7 +9,7 @@ config/name="APK 2D RPG"
 config/description="Portrait-first 2D RPG scaffold for Android and Web targets."
 run/main_scene="res://scenes/title.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon=""
+config/icon="res://assets/diamond/runtime/icon_broadsword.png"
 
 [autoload]
 
@@ -83,3 +83,4 @@ open_map={
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
