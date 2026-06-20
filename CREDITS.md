@@ -1,6 +1,6 @@
 # Credits
 
-Current third-party art/audio assets committed to the repository: one preview-only screenshot at `docs/screenshots/assets-preview.png`, composed from the CC0 candidate assets listed below. Final in-game imports still require the normal asset audit gate before APK shipping.
+Current shipped third-party art/audio assets: none. The rejected preview screenshot was removed; final in-game imports still require the normal asset audit gate before APK shipping.
 
 ## Credit Policy
 
