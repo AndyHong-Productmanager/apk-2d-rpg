@@ -63,6 +63,7 @@ const BLOCKED_SOURCE_PATTERNS: Array[String] = [
 func _initialize() -> void:
 	var failures: Array[String] = []
 	var ledger_text := _read_text("res://ASSET_LEDGER.md", failures)
+	var fixtures := _parse_fixtures()
 
 	_check_required_docs(failures)
 	_check_license_root(failures)
@@ -72,6 +73,9 @@ func _initialize() -> void:
 
 	for extra_asset in _parse_extra_assets():
 		_audit_asset(_to_resource_path(extra_asset), ledger_text, failures)
+
+	for fixture in fixtures:
+		_apply_fixture(fixture, ledger_text, failures)
 
 	if failures.is_empty():
 		print("ASSET_AUDIT_OK")
@@ -121,6 +125,36 @@ func _parse_extra_assets() -> Array[String]:
 		index += 1
 
 	return assets
+
+func _parse_fixtures() -> Array[String]:
+	var fixtures: Array[String] = []
+	var args := OS.get_cmdline_user_args()
+	var index := 0
+
+	while index < args.size():
+		if args[index] == "--fixture":
+			if index + 1 >= args.size():
+				print("AUDIT_FIXTURE_ARGUMENT_MISSING")
+				quit(1)
+				return fixtures
+			fixtures.append(args[index + 1])
+			index += 2
+			continue
+		index += 1
+
+	return fixtures
+
+func _apply_fixture(fixture: String, ledger_text: String, failures: Array[String]) -> void:
+	match fixture:
+		"missing_audio_license":
+			var fixture_asset := "res://assets/audio/fixture_missing_audio_license.ogg"
+			var fixture_ledger := "%s\n%s\n" % [ledger_text, _to_ledger_path(fixture_asset)]
+			var before := failures.size()
+			_audit_asset(fixture_asset, fixture_ledger, failures)
+			if failures.size() > before:
+				failures.append("AUDIO_LICENSE_FIXTURE_REJECTED")
+		_:
+			failures.append("UNKNOWN_AUDIT_FIXTURE: %s" % fixture)
 
 func _collect_runtime_assets(root_path: String) -> Array[String]:
 	var paths: Array[String] = []
@@ -177,8 +211,46 @@ func _check_license_proof(normalized_path: String, ledger_text: String, failures
 		return
 	if ledger_text.contains("assets/licenses/%s.md" % asset_id) or ledger_text.contains("assets/licenses/%s.txt" % asset_id):
 		return
+	if _ledger_row_has_existing_license_proof(normalized_path, ledger_text):
+		return
 
 	failures.append("ASSET_LICENSE_PROOF_MISSING: %s" % normalized_path)
+
+func _ledger_row_has_existing_license_proof(normalized_path: String, ledger_text: String) -> bool:
+	for raw_line in ledger_text.split("\n"):
+		var line := raw_line.strip_edges()
+		if not line.begins_with("|") or not line.contains(normalized_path):
+			continue
+		if _row_references_existing_license_proof(line):
+			return true
+	return false
+
+func _row_references_existing_license_proof(line: String) -> bool:
+	var marker := "assets/licenses/"
+	var index := line.find(marker)
+	while index != -1:
+		var proof_end := _license_proof_end(line, index)
+		if proof_end == -1:
+			index = line.find(marker, index + marker.length())
+			continue
+
+		var proof_path := "res://%s" % line.substr(index, proof_end - index)
+		if FileAccess.file_exists(proof_path):
+			return true
+		index = line.find(marker, proof_end)
+
+	return false
+
+func _license_proof_end(line: String, start: int) -> int:
+	var end := -1
+	for extension in [".md", ".txt"]:
+		var candidate := line.find(extension, start)
+		if candidate == -1:
+			continue
+		candidate += extension.length()
+		if end == -1 or candidate < end:
+			end = candidate
+	return end
 
 func _check_texture_rules(asset_path: String, normalized_path: String, failures: Array[String]) -> void:
 	var image := Image.new()

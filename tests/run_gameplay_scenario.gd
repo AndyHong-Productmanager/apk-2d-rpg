@@ -1,6 +1,7 @@
 extends SceneTree
 
 const SAVE_MANAGER_SCRIPT := preload("res://scripts/autoload/save_manager.gd")
+const SETTINGS_MANAGER_SCRIPT := preload("res://scripts/autoload/settings_manager.gd")
 const COMBAT_SIMULATOR_SCRIPT := preload("res://scripts/combat/combat_simulator.gd")
 
 
@@ -26,6 +27,8 @@ func _run_scenario(scenario: String) -> void:
 			_run_boss_clear()
 		"low_energy_guard":
 			_run_low_energy_guard()
+		"settings_persist":
+			_run_settings_persist()
 		_:
 			_fail("unknown scenario: %s" % scenario)
 
@@ -133,6 +136,64 @@ func _run_low_energy_guard() -> void:
 	print("NO_NEGATIVE_ENERGY_OK energy=%d" % int(combat.state.player.energy))
 
 
+func _run_settings_persist() -> void:
+	var save_manager: Node = SAVE_MANAGER_SCRIPT.new()
+	var settings_manager: Node = SETTINGS_MANAGER_SCRIPT.new()
+	save_manager.call("remove_qa_saves")
+
+	var target_settings := {
+		"master_volume": 0.42,
+		"music_volume": 0.25,
+		"sfx_volume": 0.9,
+		"text_speed": "fast",
+		"readable_text": true,
+		"reduced_motion": true,
+	}
+	settings_manager.call("apply_snapshot", target_settings)
+	var saved_settings: Dictionary = settings_manager.call("snapshot")
+	_require(_settings_match(saved_settings, target_settings), "settings snapshot captures audio readability accessibility")
+
+	var payload: Dictionary = save_manager.call("build_payload", {
+		"route": "settings",
+		"previous_route": "title",
+		"has_seen_intro": true,
+		"gameplay_ticks": 11,
+		"continue_count": 2,
+	}, saved_settings)
+	var write_result: Dictionary = save_manager.call("write_payload", payload)
+	_require(bool(write_result.ok), "settings payload writes")
+
+	settings_manager.call("reset_settings")
+	_require(not _settings_match(settings_manager.call("snapshot"), target_settings), "reset proves settings need restore")
+
+	var read_result: Dictionary = save_manager.call("read_or_recover")
+	_require(bool(read_result.ok), "settings payload reads")
+	_require(not bool(read_result.recovered), "settings payload is not recovered")
+	var loaded_payload: Dictionary = read_result.data
+	settings_manager.call("apply_snapshot", loaded_payload.get("settings", {}))
+	var loaded_settings: Dictionary = settings_manager.call("snapshot")
+	_require(_settings_match(loaded_settings, target_settings), "settings persist across save load")
+
+	var clamped_settings := {
+		"master_volume": 2.0,
+		"music_volume": -0.5,
+		"sfx_volume": 0.5,
+		"text_speed": "unreadable",
+		"readable_text": false,
+		"reduced_motion": true,
+	}
+	settings_manager.call("apply_snapshot", clamped_settings)
+	var sanitized: Dictionary = settings_manager.call("snapshot")
+	_require(is_equal_approx(float(sanitized.master_volume), 1.0), "master volume clamps high")
+	_require(is_equal_approx(float(sanitized.music_volume), 0.0), "music volume clamps low")
+	_require(String(sanitized.text_speed) == "normal", "invalid text speed falls back")
+
+	print("SETTINGS_PERSIST_OK master=0.42 music=0.25 sfx=0.90 text=fast readable=true reduced_motion=true")
+	save_manager.call("remove_qa_saves")
+	settings_manager.free()
+	save_manager.free()
+
+
 func _clear_boss(combat: RefCounted, boss_id: String) -> void:
 	combat.call("start_boss", boss_id)
 	_clear_active_enemies(combat, 60)
@@ -178,6 +239,17 @@ func _first_active_enemy_index(combat: RefCounted) -> int:
 func _require(condition: bool, message: String) -> void:
 	if not condition:
 		_fail(message)
+
+
+func _settings_match(actual: Dictionary, expected: Dictionary) -> bool:
+	return (
+		is_equal_approx(float(actual.get("master_volume", -1.0)), float(expected.master_volume))
+		and is_equal_approx(float(actual.get("music_volume", -1.0)), float(expected.music_volume))
+		and is_equal_approx(float(actual.get("sfx_volume", -1.0)), float(expected.sfx_volume))
+		and String(actual.get("text_speed", "")) == String(expected.text_speed)
+		and bool(actual.get("readable_text", false)) == bool(expected.readable_text)
+		and bool(actual.get("reduced_motion", false)) == bool(expected.reduced_motion)
+	)
 
 
 func _fail(message: String) -> void:

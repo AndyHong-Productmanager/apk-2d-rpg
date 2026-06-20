@@ -21,9 +21,12 @@ func default_payload() -> Dictionary:
 		"gameplay_ticks": 0,
 		"continue_count": 0,
 	}, {
+		"master_volume": 0.8,
 		"music_volume": 0.8,
 		"sfx_volume": 0.8,
 		"text_speed": "normal",
+		"readable_text": false,
+		"reduced_motion": false,
 	})
 
 
