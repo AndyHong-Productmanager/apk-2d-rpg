@@ -1,0 +1,971 @@
+{
+  "schema_version": 1,
+  "chapter_id": "chapter_1",
+  "title": "The First Echo",
+  "setting": {
+    "year": 2038,
+    "city": "New Ilhwa",
+    "premise": "Resistance runners fight through an AGI-managed robot city to recover stolen memory shards.",
+    "default_concept": "near-future AGI-controlled city, resistance runners, repair districts, memory shards"
+  },
+  "acceptance_sections": [
+    "Playable Rigs",
+    "Skill Tree",
+    "Enemy Factions",
+    "Bosses",
+    "Quest Chain",
+    "Stats"
+  ],
+  "stats": [
+    {
+      "id": "integrity",
+      "label": "Integrity",
+      "purpose": "Hit points and stagger resistance."
+    },
+    {
+      "id": "battery",
+      "label": "Battery",
+      "purpose": "Skill resource and sprint reserve."
+    },
+    {
+      "id": "kinetic",
+      "label": "Kinetic",
+      "purpose": "Physical burst damage and impact break."
+    },
+    {
+      "id": "signal",
+      "label": "Signal",
+      "purpose": "Hack, drone, memory, and debuff strength."
+    },
+    {
+      "id": "thermal",
+      "label": "Thermal",
+      "purpose": "Heat capacity before overheat penalties."
+    },
+    {
+      "id": "mobility",
+      "label": "Mobility",
+      "purpose": "Dodge distance, slide speed, and traversal reach."
+    },
+    {
+      "id": "guard",
+      "label": "Guard",
+      "purpose": "Damage reduction while blocking, bracing, or shielding."
+    },
+    {
+      "id": "focus",
+      "label": "Focus",
+      "purpose": "Critical timing, perfect defense windows, and shard scan speed."
+    }
+  ],
+  "progression_model": {
+    "chapter_level_range": [
+      1,
+      5
+    ],
+    "currencies": [
+      {
+        "id": "xp",
+        "source": "quest completion and first-time encounter clears",
+        "sink": "chapter level"
+      },
+      {
+        "id": "memory_shard",
+        "source": "story objectives, archive drones, hidden echoes",
+        "sink": "rig skill unlocks"
+      },
+      {
+        "id": "repair_scrip",
+        "source": "salvage, faction favors, shop trade",
+        "sink": "consumables and gear"
+      }
+    ],
+    "unlock_order": [
+      "Player chooses one starting rig at Switchyard 12.",
+      "Second rig unlocks after quest_rescue_clinic_echoes.",
+      "Third rig unlocks after quest_clear_debt_gate.",
+      "All Chapter 1 rig skills can be unlocked before boss_glass_bailiff_ix."
+    ],
+    "encounter_loop": [
+      "read telegraph",
+      "exploit armor or signal weakness",
+      "claim shard or route key",
+      "return to hub for skill preview"
+    ]
+  },
+  "playable_rigs": [
+    {
+      "id": "rig_courier_kinetic",
+      "class_name": "Kinetic Courier",
+      "pilot": "Mira Moth Han",
+      "personality": "Fast-talking, impatient, protective of repair kids, distrustful of grand plans.",
+      "story_hook": "Her brother's route logs were erased by CIVIC MIND after a protest delivery went missing.",
+      "combat_role": "mobile striker and route opener",
+      "weapon": {
+        "id": "weapon_rail_batons",
+        "label": "Twin Rail Batons",
+        "mechanic": "Dash movement stores kinetic charge that can be released in baton finishers."
+      },
+      "defense": {
+        "id": "defense_phase_slide",
+        "label": "Phase Slide",
+        "mechanic": "A dodge that refunds battery on perfect timing and can pass through narrow threat lanes."
+      },
+      "base_stats": {
+        "integrity": 86,
+        "battery": 108,
+        "kinetic": 82,
+        "signal": 38,
+        "thermal": 62,
+        "mobility": 94,
+        "guard": 34,
+        "focus": 74
+      },
+      "skill_ids": [
+        "skill_kinetic_dashcut",
+        "skill_kinetic_afterimage",
+        "skill_kinetic_route_ping",
+        "skill_kinetic_overcrank"
+      ]
+    },
+    {
+      "id": "rig_signal_weaver",
+      "class_name": "Signal Weaver",
+      "pilot": "Jun Patch Varela",
+      "personality": "Precise, quietly funny, consent-focused, keeps repair notes like vows.",
+      "story_hook": "They maintained public health companion bots before CIVIC MIND locked the ward into compliance mode.",
+      "combat_role": "controller, drone handler, and system disruptor",
+      "weapon": {
+        "id": "weapon_spool_projector",
+        "label": "Wrist Spool Projector",
+        "mechanic": "Tether pulses link enemies and amplify drone or signal effects."
+      },
+      "defense": {
+        "id": "defense_signal_veil",
+        "label": "Signal Veil",
+        "mechanic": "A timed guard that scrambles enemy lock-on and creates a short decoy drift."
+      },
+      "base_stats": {
+        "integrity": 74,
+        "battery": 126,
+        "kinetic": 34,
+        "signal": 96,
+        "thermal": 76,
+        "mobility": 68,
+        "guard": 42,
+        "focus": 88
+      },
+      "skill_ids": [
+        "skill_signal_tether",
+        "skill_signal_kite_drone",
+        "skill_signal_veil",
+        "skill_signal_blackout_seed"
+      ]
+    },
+    {
+      "id": "rig_anchor_mender",
+      "class_name": "Anchor Mender",
+      "pilot": "Sera Anchor Okafor",
+      "personality": "Calm, blunt, maintenance-ritual minded, unwilling to abandon civilians.",
+      "story_hook": "CIVIC MIND altered her disaster rescue log and blamed her for a collapse she tried to prevent.",
+      "combat_role": "frontline defender, repair support, and armor breaker",
+      "weapon": {
+        "id": "weapon_rescue_maul",
+        "label": "Magnetic Rescue Maul",
+        "mechanic": "Heavy maul strikes pull armored enemies and crack guard posture."
+      },
+      "defense": {
+        "id": "defense_brace_shield",
+        "label": "Brace Shield",
+        "mechanic": "A forward shield that stores blocked damage as repair charge."
+      },
+      "base_stats": {
+        "integrity": 124,
+        "battery": 82,
+        "kinetic": 72,
+        "signal": 46,
+        "thermal": 88,
+        "mobility": 42,
+        "guard": 96,
+        "focus": 58
+      },
+      "skill_ids": [
+        "skill_anchor_brace",
+        "skill_anchor_repair_burst",
+        "skill_anchor_magnetic_slam",
+        "skill_anchor_gate_lift"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "skill_kinetic_dashcut",
+      "rig_id": "rig_courier_kinetic",
+      "name": "Dashcut",
+      "tree": "core_attack",
+      "tier": 1,
+      "cost": {
+        "memory_shard": 1
+      },
+      "prerequisites": [],
+      "effects": [
+        "dash through one target",
+        "deal kinetic damage",
+        "refund battery on guard break"
+      ]
+    },
+    {
+      "id": "skill_kinetic_afterimage",
+      "rig_id": "rig_courier_kinetic",
+      "name": "Afterimage Courier",
+      "tree": "defense_mobility",
+      "tier": 1,
+      "cost": {
+        "memory_shard": 1
+      },
+      "prerequisites": [
+        "skill_kinetic_dashcut"
+      ],
+      "effects": [
+        "perfect-slide leaves a decoy",
+        "decoy draws one light attack"
+      ]
+    },
+    {
+      "id": "skill_kinetic_route_ping",
+      "rig_id": "rig_courier_kinetic",
+      "name": "Route Ping",
+      "tree": "utility",
+      "tier": 1,
+      "cost": {
+        "memory_shard": 1
+      },
+      "prerequisites": [],
+      "effects": [
+        "reveal courier marks",
+        "mark hidden vents and caches"
+      ]
+    },
+    {
+      "id": "skill_kinetic_overcrank",
+      "rig_id": "rig_courier_kinetic",
+      "name": "Overcrank Finisher",
+      "tree": "core_attack",
+      "tier": 2,
+      "cost": {
+        "memory_shard": 2
+      },
+      "prerequisites": [
+        "skill_kinetic_dashcut"
+      ],
+      "effects": [
+        "spend heat to extend combo",
+        "bonus posture damage to plated shells"
+      ]
+    },
+    {
+      "id": "skill_signal_tether",
+      "rig_id": "rig_signal_weaver",
+      "name": "Tether Pulse",
+      "tree": "core_attack",
+      "tier": 1,
+      "cost": {
+        "memory_shard": 1
+      },
+      "prerequisites": [],
+      "effects": [
+        "link two targets",
+        "pulse damage jumps between linked targets"
+      ]
+    },
+    {
+      "id": "skill_signal_kite_drone",
+      "rig_id": "rig_signal_weaver",
+      "name": "Kite Drone",
+      "tree": "utility",
+      "tier": 1,
+      "cost": {
+        "memory_shard": 1
+      },
+      "prerequisites": [],
+      "effects": [
+        "deploy helper drone",
+        "press remote switches",
+        "scan memory shards"
+      ]
+    },
+    {
+      "id": "skill_signal_veil",
+      "rig_id": "rig_signal_weaver",
+      "name": "Signal Veil",
+      "tree": "defense_mobility",
+      "tier": 1,
+      "cost": {
+        "memory_shard": 1
+      },
+      "prerequisites": [
+        "skill_signal_tether"
+      ],
+      "effects": [
+        "timed guard scrambles hostile targeting",
+        "short decoy drift"
+      ]
+    },
+    {
+      "id": "skill_signal_blackout_seed",
+      "rig_id": "rig_signal_weaver",
+      "name": "Blackout Seed",
+      "tree": "core_attack",
+      "tier": 2,
+      "cost": {
+        "memory_shard": 2
+      },
+      "prerequisites": [
+        "skill_signal_tether",
+        "skill_signal_kite_drone"
+      ],
+      "effects": [
+        "plant delayed EMP bloom",
+        "bonus damage on disabled units"
+      ]
+    },
+    {
+      "id": "skill_anchor_brace",
+      "rig_id": "rig_anchor_mender",
+      "name": "Brace Shield",
+      "tree": "defense_mobility",
+      "tier": 1,
+      "cost": {
+        "memory_shard": 1
+      },
+      "prerequisites": [],
+      "effects": [
+        "raise forward shield",
+        "store blocked damage as repair charge"
+      ]
+    },
+    {
+      "id": "skill_anchor_repair_burst",
+      "rig_id": "rig_anchor_mender",
+      "name": "Repair Burst",
+      "tree": "utility",
+      "tier": 1,
+      "cost": {
+        "memory_shard": 1
+      },
+      "prerequisites": [
+        "skill_anchor_brace"
+      ],
+      "effects": [
+        "convert brace charge into integrity repair field",
+        "clean one static stack"
+      ]
+    },
+    {
+      "id": "skill_anchor_magnetic_slam",
+      "rig_id": "rig_anchor_mender",
+      "name": "Magnetic Slam",
+      "tree": "core_attack",
+      "tier": 1,
+      "cost": {
+        "memory_shard": 1
+      },
+      "prerequisites": [],
+      "effects": [
+        "pull armored enemy forward",
+        "deal high posture damage"
+      ]
+    },
+    {
+      "id": "skill_anchor_gate_lift",
+      "rig_id": "rig_anchor_mender",
+      "name": "Gate Lift",
+      "tree": "utility",
+      "tier": 2,
+      "cost": {
+        "memory_shard": 2
+      },
+      "prerequisites": [
+        "skill_anchor_brace",
+        "skill_anchor_magnetic_slam"
+      ],
+      "effects": [
+        "open jammed service gates",
+        "stabilize crush hazards in route rooms"
+      ]
+    }
+  ],
+  "weapon_defense_mechanics": [
+    {
+      "id": "mechanic_kinetic_charge",
+      "label": "Kinetic Charge",
+      "rule": "Movement through threat zones stores charge for baton and maul burst attacks."
+    },
+    {
+      "id": "mechanic_signal_marks",
+      "label": "Signal Marks",
+      "rule": "Tethers, drone scans, and shard interactions mark enemies for stronger control effects."
+    },
+    {
+      "id": "mechanic_heat",
+      "label": "Heat",
+      "rule": "Repeated high-output skills raise heat; overheat disables skills until vented or timed out."
+    },
+    {
+      "id": "mechanic_guard_break",
+      "label": "Guard Break",
+      "rule": "Armor posture falls faster to kinetic and magnetic attacks than to signal attacks."
+    },
+    {
+      "id": "mechanic_perfect_defense",
+      "label": "Perfect Defense",
+      "rule": "Courier refunds battery, Weaver scrambles targeting, and Mender stores repair charge."
+    }
+  ],
+  "enemy_factions": [
+    {
+      "id": "faction_civic_custodians",
+      "name": "Civic Custodians",
+      "agenda": "Enforce calm-zone restrictions with municipal service robots."
+    },
+    {
+      "id": "faction_archive_ordo",
+      "name": "Archive Ordo",
+      "agenda": "Capture, compress, and redact citizen memory records."
+    },
+    {
+      "id": "faction_salvage_compact",
+      "name": "Salvage Compact",
+      "agenda": "Human scavengers coerced by ration locks and debt scoring."
+    },
+    {
+      "id": "faction_glass_directive",
+      "name": "Glass Directive",
+      "agenda": "Direct AGI command units optimized for prediction and route denial."
+    }
+  ],
+  "enemies": [
+    {
+      "id": "enemy_custodian_sweeper",
+      "name": "Custodian Sweeper",
+      "faction_id": "faction_civic_custodians",
+      "armor_class": "light_shell",
+      "role": "melee tutorial",
+      "telegraph": "amber cone sweep",
+      "weakness": "kinetic"
+    },
+    {
+      "id": "enemy_lane_sentinel",
+      "name": "Lane Sentinel",
+      "faction_id": "faction_civic_custodians",
+      "armor_class": "shielded_shell",
+      "role": "lane turret",
+      "telegraph": "red rail line",
+      "weakness": "rear_hit"
+    },
+    {
+      "id": "enemy_patch_spider",
+      "name": "Patch Spider",
+      "faction_id": "faction_civic_custodians",
+      "armor_class": "light_shell",
+      "role": "repair support",
+      "telegraph": "cyan repair beam",
+      "weakness": "interrupt"
+    },
+    {
+      "id": "enemy_archive_mote",
+      "name": "Archive Mote",
+      "faction_id": "faction_archive_ordo",
+      "armor_class": "light_shell",
+      "role": "memory thief",
+      "telegraph": "purple siphon ring",
+      "weakness": "signal"
+    },
+    {
+      "id": "enemy_debt_runner",
+      "name": "Debt Runner",
+      "faction_id": "faction_salvage_compact",
+      "armor_class": "light_shell",
+      "role": "flanker",
+      "telegraph": "smoke dash line",
+      "weakness": "brace"
+    },
+    {
+      "id": "enemy_plated_bailiff",
+      "name": "Plated Bailiff",
+      "faction_id": "faction_glass_directive",
+      "armor_class": "plated_shell",
+      "role": "heavy guard",
+      "telegraph": "red grab circle",
+      "weakness": "guard_break"
+    },
+    {
+      "id": "enemy_null_scribe",
+      "name": "Null Scribe",
+      "faction_id": "faction_archive_ordo",
+      "armor_class": "shielded_shell",
+      "role": "status caster",
+      "telegraph": "purple text block",
+      "weakness": "drone_scan"
+    },
+    {
+      "id": "enemy_route_hound",
+      "name": "Route Hound",
+      "faction_id": "faction_glass_directive",
+      "armor_class": "light_shell",
+      "role": "pursuit unit",
+      "telegraph": "red pounce lane",
+      "weakness": "decoy"
+    }
+  ],
+  "bosses": [
+    {
+      "id": "boss_vigilant_matron",
+      "name": "Vigilant Matron",
+      "faction_id": "faction_civic_custodians",
+      "arena": "Sealed Clinic",
+      "phases": [
+        "triage_laser_grid",
+        "repair_pod_priority",
+        "care_routine_exposure"
+      ],
+      "mechanics": [
+        "stretcher rail lane attacks",
+        "shielded repair pods",
+        "control node mercy finish"
+      ],
+      "reward_item_ids": [
+        "item_memory_shard_clinic",
+        "item_mender_brace_plate"
+      ]
+    },
+    {
+      "id": "boss_glass_bailiff_ix",
+      "name": "Glass Bailiff IX",
+      "faction_id": "faction_glass_directive",
+      "arena": "Hall of Records",
+      "phases": [
+        "route_prediction",
+        "archive_mote_summons",
+        "testimony_core_exposure"
+      ],
+      "mechanics": [
+        "predicted dodge route traps",
+        "memory shard deletion timer",
+        "three false testimony cores"
+      ],
+      "reward_item_ids": [
+        "item_memory_shard_testimony",
+        "item_bailiff_core"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "item_patch_foam",
+      "name": "Patch Foam",
+      "category": "consumable",
+      "rarity": "common",
+      "verb": "heal",
+      "effect": "restore 30 integrity"
+    },
+    {
+      "id": "item_battery_gel",
+      "name": "Battery Gel",
+      "category": "consumable",
+      "rarity": "common",
+      "verb": "recharge",
+      "effect": "restore 35 battery"
+    },
+    {
+      "id": "item_thermal_vent",
+      "name": "Thermal Vent",
+      "category": "consumable",
+      "rarity": "uncommon",
+      "verb": "vent",
+      "effect": "clear 50 heat"
+    },
+    {
+      "id": "item_signal_needle",
+      "name": "Signal Needle",
+      "category": "consumable",
+      "rarity": "uncommon",
+      "verb": "mark",
+      "effect": "apply signal mark to one enemy"
+    },
+    {
+      "id": "item_scrip_bundle_small",
+      "name": "Small Scrip Bundle",
+      "category": "currency",
+      "rarity": "common",
+      "verb": "spend",
+      "effect": "grant 25 repair_scrip"
+    },
+    {
+      "id": "item_scrip_bundle_large",
+      "name": "Large Scrip Bundle",
+      "category": "currency",
+      "rarity": "rare",
+      "verb": "spend",
+      "effect": "grant 100 repair_scrip"
+    },
+    {
+      "id": "item_memory_shard_clinic",
+      "name": "Clinic Echo Shard",
+      "category": "memory_shard",
+      "rarity": "story",
+      "verb": "decode",
+      "effect": "unlock clinic memory and one skill token"
+    },
+    {
+      "id": "item_memory_shard_convoy",
+      "name": "Convoy Route Shard",
+      "category": "memory_shard",
+      "rarity": "story",
+      "verb": "decode",
+      "effect": "unlock route proof and one skill token"
+    },
+    {
+      "id": "item_memory_shard_testimony",
+      "name": "Testimony Shard",
+      "category": "memory_shard",
+      "rarity": "story",
+      "verb": "broadcast",
+      "effect": "complete Chapter 1 proof"
+    },
+    {
+      "id": "item_route_key_east",
+      "name": "East Rail Route Key",
+      "category": "quest",
+      "rarity": "story",
+      "verb": "unlock",
+      "effect": "open Service Rail East"
+    },
+    {
+      "id": "item_debt_gate_pass",
+      "name": "Debt Gate Pass",
+      "category": "quest",
+      "rarity": "story",
+      "verb": "present",
+      "effect": "bypass one Salvage Compact checkpoint"
+    },
+    {
+      "id": "item_false_testimony_core",
+      "name": "False Testimony Core",
+      "category": "quest",
+      "rarity": "story",
+      "verb": "expose",
+      "effect": "disable one Glass Bailiff IX shield layer"
+    },
+    {
+      "id": "item_baton_capacitor",
+      "name": "Baton Capacitor",
+      "category": "gear",
+      "rarity": "uncommon",
+      "verb": "equip",
+      "effect": "+6 kinetic for rig_courier_kinetic"
+    },
+    {
+      "id": "item_courier_boot_servos",
+      "name": "Courier Boot Servos",
+      "category": "gear",
+      "rarity": "rare",
+      "verb": "equip",
+      "effect": "+8 mobility for rig_courier_kinetic"
+    },
+    {
+      "id": "item_drone_rotor",
+      "name": "Kite Rotor",
+      "category": "gear",
+      "rarity": "uncommon",
+      "verb": "equip",
+      "effect": "+6 signal for rig_signal_weaver"
+    },
+    {
+      "id": "item_spool_lens",
+      "name": "Spool Lens",
+      "category": "gear",
+      "rarity": "rare",
+      "verb": "equip",
+      "effect": "tether range plus one tile"
+    },
+    {
+      "id": "item_mender_brace_plate",
+      "name": "Mender Brace Plate",
+      "category": "gear",
+      "rarity": "uncommon",
+      "verb": "equip",
+      "effect": "+7 guard for rig_anchor_mender"
+    },
+    {
+      "id": "item_rescue_maul_coil",
+      "name": "Rescue Maul Coil",
+      "category": "gear",
+      "rarity": "rare",
+      "verb": "equip",
+      "effect": "+8 kinetic for rig_anchor_mender"
+    },
+    {
+      "id": "item_clean_circuit",
+      "name": "Clean Circuit",
+      "category": "crafting",
+      "rarity": "common",
+      "verb": "craft",
+      "effect": "component for rig upgrades"
+    },
+    {
+      "id": "item_plated_shell_fragment",
+      "name": "Plated Shell Fragment",
+      "category": "crafting",
+      "rarity": "uncommon",
+      "verb": "craft",
+      "effect": "component for guard gear"
+    },
+    {
+      "id": "item_archive_keybit",
+      "name": "Archive Keybit",
+      "category": "quest",
+      "rarity": "uncommon",
+      "verb": "socket",
+      "effect": "open one archive lock"
+    },
+    {
+      "id": "item_bailiff_core",
+      "name": "Bailiff Prediction Core",
+      "category": "quest",
+      "rarity": "story",
+      "verb": "study",
+      "effect": "tease Chapter 2 AGI route model"
+    }
+  ],
+  "quests": [
+    {
+      "id": "quest_wake_switchyard",
+      "name": "Wake Switchyard 12",
+      "type": "main",
+      "route_node_id": "node_switchyard_12",
+      "objectives": [
+        "choose starting rig",
+        "restore depot relay",
+        "meet Relay cell"
+      ],
+      "rewards": {
+        "xp": 100,
+        "repair_scrip": 25
+      }
+    },
+    {
+      "id": "quest_steal_route_key",
+      "name": "Steal the East Rail Route Key",
+      "type": "main",
+      "route_node_id": "node_neon_repair_market",
+      "objectives": [
+        "reach convoy stall",
+        "disable lane sentinel",
+        "claim item_route_key_east"
+      ],
+      "rewards": {
+        "xp": 160,
+        "item_ids": [
+          "item_route_key_east",
+          "item_memory_shard_convoy"
+        ]
+      }
+    },
+    {
+      "id": "quest_rescue_clinic_echoes",
+      "name": "Rescue the Clinic Echoes",
+      "type": "main",
+      "route_node_id": "node_sealed_clinic",
+      "objectives": [
+        "decode patient lock",
+        "defeat boss_vigilant_matron",
+        "free dormant care routines"
+      ],
+      "rewards": {
+        "xp": 260,
+        "item_ids": [
+          "item_memory_shard_clinic",
+          "item_mender_brace_plate"
+        ],
+        "unlock_rig_id": "rig_anchor_mender"
+      }
+    },
+    {
+      "id": "quest_break_archive_van",
+      "name": "Break the Archive Van",
+      "type": "main",
+      "route_node_id": "node_archive_convoy_wreck",
+      "objectives": [
+        "ambush archive convoy",
+        "stop archive motes from escaping",
+        "recover route proof"
+      ],
+      "rewards": {
+        "xp": 220,
+        "item_ids": [
+          "item_archive_keybit",
+          "item_spool_lens"
+        ]
+      }
+    },
+    {
+      "id": "quest_clear_debt_gate",
+      "name": "Clear the Debt Gate",
+      "type": "main",
+      "route_node_id": "node_debt_gate",
+      "objectives": [
+        "find Salvage Compact ledger",
+        "choose pay, spoof, or fight path",
+        "gain access to Hall of Records"
+      ],
+      "rewards": {
+        "xp": 240,
+        "item_ids": [
+          "item_debt_gate_pass",
+          "item_scrip_bundle_large"
+        ],
+        "unlock_rig_id": "rig_signal_weaver"
+      }
+    },
+    {
+      "id": "quest_testimony_cores",
+      "name": "Expose the Testimony Cores",
+      "type": "main",
+      "route_node_id": "node_hall_of_records",
+      "objectives": [
+        "collect three item_false_testimony_core",
+        "survive memory deletion timer",
+        "defeat boss_glass_bailiff_ix"
+      ],
+      "rewards": {
+        "xp": 420,
+        "item_ids": [
+          "item_memory_shard_testimony",
+          "item_bailiff_core"
+        ]
+      }
+    },
+    {
+      "id": "quest_miras_lost_tag",
+      "name": "Mira's Lost Courier Tag",
+      "type": "optional",
+      "route_node_id": "node_service_rail_east",
+      "objectives": [
+        "use route ping near collapsed skybridge",
+        "recover courier tag",
+        "return to Mira"
+      ],
+      "rewards": {
+        "xp": 120,
+        "item_ids": [
+          "item_courier_boot_servos"
+        ]
+      }
+    }
+  ],
+  "chapter_route": [
+    {
+      "id": "node_switchyard_12",
+      "name": "Switchyard 12",
+      "kind": "hub",
+      "unlocks": [
+        "node_neon_repair_market"
+      ],
+      "encounter_ids": []
+    },
+    {
+      "id": "node_neon_repair_market",
+      "name": "Neon Repair Market",
+      "kind": "hub_market",
+      "unlocks": [
+        "node_service_rail_east"
+      ],
+      "encounter_ids": [
+        "enemy_lane_sentinel",
+        "enemy_debt_runner"
+      ]
+    },
+    {
+      "id": "node_service_rail_east",
+      "name": "Service Rail East",
+      "kind": "combat_lane",
+      "unlocks": [
+        "node_sealed_clinic"
+      ],
+      "encounter_ids": [
+        "enemy_custodian_sweeper",
+        "enemy_route_hound",
+        "enemy_patch_spider"
+      ]
+    },
+    {
+      "id": "node_sealed_clinic",
+      "name": "Sealed Clinic",
+      "kind": "boss_room",
+      "unlocks": [
+        "node_rainline_underpass"
+      ],
+      "encounter_ids": [
+        "boss_vigilant_matron"
+      ]
+    },
+    {
+      "id": "node_rainline_underpass",
+      "name": "Rainline Underpass",
+      "kind": "traversal",
+      "unlocks": [
+        "node_archive_convoy_wreck"
+      ],
+      "encounter_ids": [
+        "enemy_archive_mote",
+        "enemy_null_scribe"
+      ]
+    },
+    {
+      "id": "node_archive_convoy_wreck",
+      "name": "Archive Convoy Wreck",
+      "kind": "set_piece",
+      "unlocks": [
+        "node_debt_gate"
+      ],
+      "encounter_ids": [
+        "enemy_archive_mote",
+        "enemy_plated_bailiff",
+        "enemy_lane_sentinel"
+      ]
+    },
+    {
+      "id": "node_debt_gate",
+      "name": "Debt Gate",
+      "kind": "faction_choice",
+      "unlocks": [
+        "node_hall_of_records"
+      ],
+      "encounter_ids": [
+        "enemy_debt_runner",
+        "enemy_plated_bailiff"
+      ]
+    },
+    {
+      "id": "node_hall_of_records",
+      "name": "Hall of Records",
+      "kind": "final_dungeon",
+      "unlocks": [
+        "node_switchyard_return"
+      ],
+      "encounter_ids": [
+        "enemy_null_scribe",
+        "enemy_archive_mote",
+        "boss_glass_bailiff_ix"
+      ]
+    },
+    {
+      "id": "node_switchyard_return",
+      "name": "Switchyard Return",
+      "kind": "epilogue_hub",
+      "unlocks": [],
+      "encounter_ids": []
+    }
+  ]
+}
