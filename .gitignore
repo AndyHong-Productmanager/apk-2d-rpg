@@ -14,3 +14,8 @@ desktop.ini
 .omo/evidence/
 evidence/
 .evidence/
+
+# Node/Playwright local state
+node_modules/
+test-results/
+playwright-report/
