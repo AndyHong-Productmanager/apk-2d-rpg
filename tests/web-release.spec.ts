@@ -16,7 +16,7 @@ test("GitHub README exposes screenshots and install context", async ({ page }) =
   await page.goto(repoUrl);
 
   await expect(page.getByText("Lazycodex 딸깍으로 만든 RPG게임")).toBeVisible();
-  await expect(page.getByText("com.lazycodex.apk2drpg")).toBeVisible();
+  await expect(page.getByText("com.lazycodex.apk2drpg").first()).toBeVisible();
   await expect(page.getByAltText("Combat")).toBeVisible();
   await page.screenshot({ path: ".omo/evidence/playwright-release/github-readme.png", fullPage: true });
 });
@@ -24,8 +24,10 @@ test("GitHub README exposes screenshots and install context", async ({ page }) =
 test("GitHub release exposes APK and screenshot assets", async ({ page }) => {
   await page.goto(releaseUrl);
 
-  await expect(page.getByRole("heading", { name: "v0.1.0" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "v0.1.0" }).first()).toBeVisible();
   await expect(page.getByText("apk-2d-rpg-debug.apk")).toBeVisible();
+
+  await page.goto(`${repoUrl}/releases/expanded_assets/v0.1.0`);
   await expect(page.getByText("combat.png")).toBeVisible();
   await page.screenshot({ path: ".omo/evidence/playwright-release/github-release.png", fullPage: true });
 });
