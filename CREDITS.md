@@ -1,6 +1,6 @@
 # Credits
 
-Current shipped third-party art/audio assets at Wave 0: none. This file is prepared for the approved asset strategy in ASSET_LEDGER.md and must be updated before any imported asset is included in a playable APK.
+Current third-party art/audio assets committed to the repository: one preview-only screenshot at `docs/screenshots/assets-preview.png`, composed from the CC0 candidate assets listed below. Final in-game imports still require the normal asset audit gate before APK shipping.
 
 ## Credit Policy
 
@@ -20,6 +20,7 @@ Use these lines only after the corresponding asset files are imported:
 | RPG Urban Pack / RPG Urban Kit | https://kenney.nl/assets/rpg-urban-pack / https://kenney-assets.itch.io/rpg-urban-kit | Kenney | CC0 1.0 Universal | `Assets by Kenney (kenney.nl), CC0.` |
 | Tiny Town | https://kenney.nl/assets/tiny-town | Kenney | Creative Commons CC0 | `Assets by Kenney (kenney.nl), CC0.` |
 | Top-down Shooter | https://www.kenney.nl/assets/top-down-shooter | Kenney | Creative Commons CC0 | `Assets by Kenney (kenney.nl), CC0.` |
+| Tiny Battle | https://kenney.nl/assets/tiny-battle | Kenney | Creative Commons CC0 | `Assets by Kenney (kenney.nl), CC0.` |
 | Top Down Dungeon Pack | https://opengameart.org/content/top-down-dungeon-pack | Screaming Brain Studios | CC0 | `Top Down Dungeon Pack by Screaming Brain Studios, CC0.` |
 | Top-down simple tile-sets | https://opengameart.org/content/top-down-simple-tile-sets | yd | CC0 | `Top-down simple tile-sets by yd, CC0.` |
 | Top Down Adventure Assets | https://opengameart.org/content/top-down-adventure-assets | ansimuz | CC0 | `Top Down Adventure Assets by Ansimuz, CC0.` |
