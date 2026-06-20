@@ -2,6 +2,10 @@
 
 Status: asset direction reset. The previous mixed free-asset preview was rejected and must not be used as final art direction.
 
+Current preview artifact: `docs/screenshots/assets-preview.png`
+
+Current tested pack: `Diamond - Top Down Pixel Art Pack` from itch.io. This is a coherent 32x32 RPG pack, but it is fantasy-biased. Andy should approve only if this style is acceptable as the base style after cyberpunk recolor/reskin work.
+
 ## Decision Rule
 
 Use one coherent art family first, then add only compatible packs. Do not mix random CC0 packs into a final-looking screenshot.
@@ -31,4 +35,4 @@ If Andy wants a more modern/cyberpunk/human look, use a paid direction:
 
 Do not continue Todo 8 or import final gameplay art until Andy approves one of these directions.
 
-After approval, create a new `docs/screenshots/assets-preview.png` from the chosen pack only.
+After approval, import selected runtime assets from the chosen pack only. If Diamond is rejected, delete `docs/screenshots/assets-preview.png` and select a more modern/cyberpunk paid pack before making a new preview.

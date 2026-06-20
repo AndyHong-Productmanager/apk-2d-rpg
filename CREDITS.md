@@ -1,6 +1,6 @@
 # Credits
 
-Current shipped third-party art/audio assets: none. The rejected preview screenshot was removed; final in-game imports still require the normal asset audit gate before APK shipping.
+Current third-party art committed to the repository: preview-only screenshot `docs/screenshots/assets-preview.png` and license proof `assets/licenses/diamond-top-down-pixel-art-LICENSE.txt`. Final in-game imports still require the normal asset audit gate before APK shipping.
 
 ## Credit Policy
 
@@ -17,6 +17,7 @@ Use these lines only after the corresponding asset files are imported:
 
 | asset | source | author | license | attribution text |
 | --- | --- | --- | --- | --- |
+| Diamond Top Down Pixel Art Pack | https://dotmancer.itch.io/diamond-top-down-pixel-art | Dotmancer | CC0 1.0 Universal | `Diamond Top Down Pixel Art Pack by Dotmancer, CC0.` |
 | RPG Urban Pack / RPG Urban Kit | https://kenney.nl/assets/rpg-urban-pack / https://kenney-assets.itch.io/rpg-urban-kit | Kenney | CC0 1.0 Universal | `Assets by Kenney (kenney.nl), CC0.` |
 | Tiny Town | https://kenney.nl/assets/tiny-town | Kenney | Creative Commons CC0 | `Assets by Kenney (kenney.nl), CC0.` |
 | Top-down Shooter | https://www.kenney.nl/assets/top-down-shooter | Kenney | Creative Commons CC0 | `Assets by Kenney (kenney.nl), CC0.` |
