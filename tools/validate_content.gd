@@ -18,6 +18,7 @@ func _initialize() -> void:
 
 	if failures.is_empty():
 		print("content validation passed")
+		print("CONTENT_VALIDATION_OK")
 		quit(0)
 		return
 
